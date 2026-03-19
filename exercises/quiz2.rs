@@ -38,7 +38,8 @@ mod my_module {
             match command {
                 Command::Uppercase => output.push(string.to_uppercase()),
                 Command::Trim => output.push(string.trim().to_string()),
-                Command::Append(n) => output.push(String::from(format!("{}{}", string, "bar".repeat(*n))))
+                // By implicit ref binding, n is of type &usize
+                Command::Append(n) => output.push(format!("{}{}", string, "bar".repeat(*n)))
             }
         }
         output
