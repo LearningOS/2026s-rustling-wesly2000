@@ -7,25 +7,26 @@
 // Execute `rustlings hint as_ref_mut` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
 // Obtain the number of bytes (not characters) in the given argument.
 // TODO: Add the AsRef trait appropriately as a trait bound.
-fn byte_counter<T>(arg: T) -> usize {
+fn byte_counter<T: AsRef<str>>(arg: T) -> usize {
     arg.as_ref().as_bytes().len()
 }
 
 // Obtain the number of characters (not bytes) in the given argument.
 // TODO: Add the AsRef trait appropriately as a trait bound.
-fn char_counter<T>(arg: T) -> usize {
+fn char_counter<T: AsRef<str>>(arg: T) -> usize {
     arg.as_ref().chars().count()
 }
 
+// trait AsMut<T: ?Sized> {
+//     fn as_mut(&mut self) -> &mut T;
+// }
+// For example, if T = Box<u32>, std has an impl that effectively lets Box<u32>::as_mut() produce &mut u32. If T did not implement AsMut<u32>, compilation would fail.
 // Squares a number using as_mut().
-// TODO: Add the appropriate trait bound.
-fn num_sq<T>(arg: &mut T) {
-    // TODO: Implement the function body.
-    ???
+fn num_sq<T: AsMut<u32>>(arg: &mut T) {
+    let num = arg.as_mut();
+    *num *= *num;
 }
 
 #[cfg(test)]
